@@ -15,3 +15,17 @@ import pandas as pd
 
 data = pd.read_csv(data_file)
 print(data)
+
+inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2]
+print(inputs)
+inputs = inputs.fillna(inputs.mean())
+print(inputs)
+inputs = pd.get_dummies(inputs, dummy_na=True)
+print(inputs)
+
+import torch
+
+X = torch.tensor(inputs.to_numpy(dtype=float))
+y = torch.tensor(outputs.to_numpy(dtype=float))
+
+print(X, y)
